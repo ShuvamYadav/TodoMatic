@@ -3,6 +3,7 @@ import React from "react";
 function FilterButton(props) {
   return (
     <button
+      data-testid="filter"
       type="button"
       className="btn toggle-btn"
       aria-pressed={props.isPressed}

@@ -75,6 +75,7 @@ export default function Todo(props) {
           Edit <span className="visually-hidden">{props.name}</span>
         </button>
         <button
+          data-testid={"delete" + props.id}
           type="button"
           className="btn btn__danger"
           onClick={() => props.deleteTask(props.id)}

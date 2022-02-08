@@ -71,8 +71,17 @@ function App(props) {
     const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
     setTasks([...tasks, newTask]);
   }
+  let headingText="";
   const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
-  const headingText = `${taskList.length} ${tasksNoun} remaining`;
+  if(filter=='All'){
+    let length = tasks.filter((task) => !task.completed).length;
+    headingText = `${length} ${tasksNoun} remaining`;
+  }
+  else{
+    headingText = `${taskList.length} ${tasksNoun} remaining`;
+  }
+ 
+  //const headingText = `${taskList.length} ${tasksNoun} remaining`;
   const listHeadingRef = useRef(null);
   const prevTaskLength = usePrevious(tasks.length);
   useEffect(() => {
@@ -82,10 +91,10 @@ function App(props) {
   }, [tasks.length, prevTaskLength]);
   return (
     <div className="todoapp stack-large">
-      <h1>TodoMatic</h1>
+      <h1 data-testid='title'>TodoMatic</h1>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">{filterList}</div>
-      <h2 id="list-heading" tabIndex="-1" ref={listHeadingRef}>
+      <h2 data-testid='heading' id="list-heading" tabIndex="-1" ref={listHeadingRef}>
         {headingText}
       </h2>
       <ul
